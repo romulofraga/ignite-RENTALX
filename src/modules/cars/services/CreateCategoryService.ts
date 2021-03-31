@@ -6,13 +6,11 @@ interface IRequest {
 }
 
 export default class CategoryRepositoryService {
-  constructor(private categoryRepository: ICategoryRepository) {
-    /**/
-  }
+  constructor(private categoryRepository: ICategoryRepository) { }
 
   public async execute({ name, description }: IRequest): Promise<void> {
     const categoryAlreadyExists = await this.categoryRepository.findByName(
-      name
+      name,
     );
 
     if (categoryAlreadyExists) {

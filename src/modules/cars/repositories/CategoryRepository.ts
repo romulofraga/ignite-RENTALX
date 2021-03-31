@@ -1,5 +1,5 @@
 import ICreateCategoryDTO from "../DTOS/ICreateCategoryDTO";
-import Category from "../routes/model/Category";
+import Category from "../model/Category";
 import ICategoryRepository from "./ICategoryRepository";
 
 export default class CategoryRepository implements ICategoryRepository {
