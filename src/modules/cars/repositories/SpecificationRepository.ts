@@ -1,4 +1,4 @@
-import ICreateSpecificationDTO from "../DTOS/ICreateSecificationDTO";
+import ICreateSpecificationDTO from "../dtos/ICreateSecificationDTO";
 import Specification from "../model/Specification";
 import ISpecificationRepository from "./ISpecificationRepository";
 
