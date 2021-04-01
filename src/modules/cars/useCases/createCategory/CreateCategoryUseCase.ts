@@ -1,4 +1,4 @@
-import ICategoryRepository from "../repositories/ICategoryRepository";
+import ICategoryRepository from "../../repositories/ICategoryRepository";
 
 interface IRequest {
   name: string;
@@ -16,6 +16,7 @@ export default class CategoryRepositoryService {
     if (categoryAlreadyExists) {
       throw new Error("Category already exists!");
     }
+
     await this.categoryRepository.create({ name, description });
   }
 }
