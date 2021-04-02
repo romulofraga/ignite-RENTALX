@@ -1,6 +1,6 @@
-import ICreateSpecificationDTO from "../dtos/ICreateSecificationDTO";
-import Specification from "../model/Specification";
-import ISpecificationRepository from "./ISpecificationRepository";
+import ICreateSpecificationDTO from "../../dtos/ICreateSecificationDTO";
+import Specification from "../../model/Specification";
+import ISpecificationRepository from "../ISpecificationRepository";
 
 export default class SpecificationRepository
   implements ISpecificationRepository {
@@ -25,7 +25,7 @@ export default class SpecificationRepository
   //   return this.specifications;
   // }
 
-  public async findByName(name: string): Promise<Specification> {
+  public findByName(name: string): Specification {
     const specification = this.specifications.find(
       (specification) => specification.name === name
     );

@@ -8,15 +8,15 @@ interface IRequest {
 export default class CategoryRepositoryService {
   constructor(private specificationRepository: ISpecificationRepository) {}
 
-  public async execute({ name, description }: IRequest): Promise<void> {
-    const specificationAlreadyExists = await this.specificationRepository.findByName(
+  public execute({ name, description }: IRequest): void {
+    const specificationAlreadyExists = this.specificationRepository.findByName(
       name
     );
 
-    if (!specificationAlreadyExists) {
+    if (specificationAlreadyExists) {
       throw new Error("Specification already exists!");
     }
 
-    await this.specificationRepository.create({ name, description });
+    this.specificationRepository.create({ name, description });
   }
 }
