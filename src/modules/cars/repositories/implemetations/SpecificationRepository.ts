@@ -6,14 +6,20 @@ export default class SpecificationRepository
   implements ISpecificationRepository {
   private specifications: Specification[];
 
+  private static INSTANCE: SpecificationRepository;
+
   constructor() {
     this.specifications = [];
   }
 
-  public async create({
-    name,
-    description,
-  }: ICreateSpecificationDTO): Promise<void> {
+  public static getInstance(): SpecificationRepository {
+    if (!SpecificationRepository.INSTANCE) {
+      SpecificationRepository.INSTANCE = new SpecificationRepository();
+    }
+    return SpecificationRepository.INSTANCE;
+  }
+
+  public create({ name, description }: ICreateSpecificationDTO): void {
     const specification = new Specification();
 
     Object.assign(specification, { name, description, created_at: new Date() });
@@ -21,9 +27,9 @@ export default class SpecificationRepository
     this.specifications.push(specification);
   }
 
-  // public async list(): Promise<Specification[]> {
-  //   return this.specifications;
-  // }
+  public list(): Specification[] {
+    return this.specifications;
+  }
 
   public findByName(name: string): Specification {
     const specification = this.specifications.find(
