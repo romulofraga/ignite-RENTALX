@@ -1,13 +1,13 @@
-import CategoryRepository from "../../repositories/implemetations/CategoryRepository";
-import ListCategoriesController from "./ListCategoriesController";
-import ListCategoriesUseCase from "./ListCategoryUseCase";
+// import CategoryRepository from "../../repositories/implemetations/CategoryRepository";
+// import ListCategoriesController from "./ListCategoriesController";
+// import ListCategoriesUseCase from "./ListCategoryUseCase";
 
-const categoryRepository = CategoryRepository.getInstance();
+// const categoryRepository = null;
 
-const listCategoriesUseCase = new ListCategoriesUseCase(categoryRepository);
+// const listCategoriesUseCase = new ListCategoriesUseCase(categoryRepository);
 
-const listCategoriesController = new ListCategoriesController(
-  listCategoriesUseCase
-);
+// const listCategoriesController = new ListCategoriesController(
+//   listCategoriesUseCase
+// );
 
-export default listCategoriesController;
+// export default listCategoriesController;

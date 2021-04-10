@@ -1,5 +1,6 @@
 import csvParse from "csv-parse";
 import fs from "fs";
+import { inject, injectable } from "tsyringe";
 
 import ICategoryRepository from "../../repositories/ICategoryRepository";
 
@@ -8,8 +9,12 @@ interface IImportCategory {
   description: string;
 }
 
+@injectable()
 export default class ImportCategoryUseCase {
-  constructor(private categoryRepository: ICategoryRepository) {}
+  constructor(
+    @inject("CategoryRepository")
+    private categoryRepository: ICategoryRepository
+  ) {}
 
   public loadCategory(file: Express.Multer.File): Promise<IImportCategory[]> {
     return new Promise((resolve, reject) => {

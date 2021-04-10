@@ -1,14 +1,14 @@
-import SpecificationRepository from "../../repositories/implemetations/SpecificationRepository";
-import CreateSpecificationController from "./CreateSpecificationController";
-import CreateSpecificationUseCase from "./CreateSpecificationUseCase";
+// import SpecificationRepository from "../../repositories/implemetations/SpecificationRepository";
+// import CreateSpecificationController from "./CreateSpecificationController";
+// import CreateSpecificationUseCase from "./CreateSpecificationUseCase";
 
-const specificationRepository = SpecificationRepository.getInstance();
+// const specificationRepository = null;
 
-const createSpecificationUseCase = new CreateSpecificationUseCase(
-  specificationRepository
-);
-const createSpecificationController = new CreateSpecificationController(
-  createSpecificationUseCase
-);
+// const createSpecificationUseCase = new CreateSpecificationUseCase(
+//   specificationRepository
+// );
+// const createSpecificationController = new CreateSpecificationController(
+//   createSpecificationUseCase
+// );
 
-export default createSpecificationController;
+// export default createSpecificationController;

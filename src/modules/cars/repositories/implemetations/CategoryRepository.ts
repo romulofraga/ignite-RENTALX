@@ -1,37 +1,43 @@
+import { getRepository, Repository } from "typeorm";
+
 import ICreateCategoryDTO from "../../dtos/ICreateCategoryDTO";
-import Category from "../../model/Category";
+import Category from "../../entities/Category";
 import ICategoryRepository from "../ICategoryRepository";
 
 export default class CategoryRepository implements ICategoryRepository {
-  private categories: Category[];
+  private repository: Repository<Category>;
 
-  private static INSTANCE: CategoryRepository;
+  // private static INSTANCE: CategoryRepository;
 
-  private constructor() {
-    this.categories = [];
+  constructor() {
+    this.repository = getRepository(Category);
   }
 
-  public static getInstance(): CategoryRepository {
-    if (!CategoryRepository.INSTANCE) {
-      CategoryRepository.INSTANCE = new CategoryRepository();
-    }
-    return CategoryRepository.INSTANCE;
+  // public static getInstance(): CategoryRepository {
+  //   if (!CategoryRepository.INSTANCE) {
+  //     CategoryRepository.INSTANCE = new CategoryRepository();
+  //   }
+  //   return CategoryRepository.INSTANCE;
+  // }
+
+  public async create({
+    name,
+    description,
+  }: ICreateCategoryDTO): Promise<void> {
+    const category = this.repository.create();
+
+    Object.assign(category, { name, description });
+
+    await this.repository.save(category);
   }
 
-  public create({ name, description }: ICreateCategoryDTO): void {
-    const category = new Category();
-
-    Object.assign(category, { name, description, created_at: new Date() });
-
-    this.categories.push(category);
+  public async list(): Promise<Category[]> {
+    const categories = await this.repository.find();
+    return categories;
   }
 
-  public list(): Category[] {
-    return this.categories;
-  }
-
-  public findByName(name: string): Category {
-    const category = this.categories.find((category) => category.name === name);
+  public async findByName(name: string): Promise<Category> {
+    const category = await this.repository.findOne({ name });
 
     return category;
   }
