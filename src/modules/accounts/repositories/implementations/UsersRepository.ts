@@ -10,6 +10,11 @@ export default class UsersRepository implements IUsersRepository {
   constructor() {
     this.repository = getRepository(User);
   }
+  public async findById(user_id: string): Promise<User> {
+    const user = this.repository.findOne(user_id);
+
+    return user;
+  }
 
   public async create({
     name,

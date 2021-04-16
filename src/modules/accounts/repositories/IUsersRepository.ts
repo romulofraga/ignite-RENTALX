@@ -9,4 +9,5 @@ export default interface IUsersRepository {
     driver_license,
   }: ICreateUserDTO): Promise<void>;
   findByEmail(email: string): Promise<User>;
+  findById(user_id: string): Promise<User>;
 }
