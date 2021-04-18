@@ -36,7 +36,9 @@ export default async function ensureAuthenticated(
     }
 
     // fornece o id do usuário autenticado para as rotas que usam o middleware
-    request.user.id = user_id;
+    request.user = {
+      id: user_id,
+    };
 
     next();
   } catch {

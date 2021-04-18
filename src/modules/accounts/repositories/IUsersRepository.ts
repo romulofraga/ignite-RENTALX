@@ -7,6 +7,8 @@ export default interface IUsersRepository {
     email,
     password,
     driver_license,
+    avatar,
+    id,
   }: ICreateUserDTO): Promise<void>;
   findByEmail(email: string): Promise<User>;
   findById(user_id: string): Promise<User>;
