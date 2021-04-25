@@ -11,11 +11,11 @@ interface IRequest {
 }
 
 interface IResponse {
+  token: string;
   user: {
     name: string;
     email: string;
   };
-  token: string;
 }
 
 @injectable()
@@ -38,7 +38,6 @@ export default class AuthenticateUserUseCase {
     if (!passwordMatch) {
       throw new AppError("Email or password incorrect");
     }
-
     // criar jwt
     const token = sign({}, "f2debdd1b79be0f7e4742eaa8d26cccf", {
       subject: user.id,
