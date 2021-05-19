@@ -30,7 +30,7 @@ export class CreateCars1619743459204 implements MigrationInterface {
             default: true,
           },
           {
-            name: "licence_plate",
+            name: "license_plate",
             type: "varchar",
           },
           {
@@ -56,8 +56,8 @@ export class CreateCars1619743459204 implements MigrationInterface {
           {
             name: "FKCategoryCar",
             referencedTableName: "categories",
-            columnNames: ["category_id"],
             referencedColumnNames: ["id"],
+            columnNames: ["category_id"],
             onDelete: "SET NULL",
             onUpdate: "SET NULL",
           },
