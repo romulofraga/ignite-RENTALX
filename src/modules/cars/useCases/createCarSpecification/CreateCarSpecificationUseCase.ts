@@ -22,12 +22,16 @@ export default class CreateCarSpecificationUseCase {
   public async execute({ car_id, specifications_ids }: IRequest): Promise<Car> {
     const car = await this.carsRepository.findById(car_id);
     if (!car) {
-      throw new AppError("adalksjd");
+      throw new AppError("Car not found");
     }
 
     const specifications = await this.specificationRepository.findByIds(
       specifications_ids
     );
+
+    if (specifications.length <= 0) {
+      throw new AppError("specifications not found");
+    }
 
     car.specifications = specifications;
 
