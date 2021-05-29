@@ -13,34 +13,39 @@ export default class CarsRepository implements ICarsRepository {
   }
 
   public async create({
-    name,
-    description,
-    daily_rate,
-    fine_amount,
-    license_plate,
+    id,
     brand,
     category_id,
+    daily_rate,
+    description,
+    fine_amount,
+    license_plate,
+    name,
+    specifications,
   }: ICreateCarDTO): Promise<Car> {
-    const car = this.repository.create();
-
-    Object.assign(car, {
-      name,
-      description,
-      daily_rate,
-      fine_amount,
-      license_plate,
+    const car = this.repository.create({
+      id,
       brand,
       category_id,
+      daily_rate,
+      description,
+      fine_amount,
+      license_plate,
+      name,
+      specifications,
     });
 
     await this.repository.save(car);
+    return car;
+  }
 
+  public async findById(car_id: string): Promise<Car> {
+    const car = await this.repository.findOne(car_id);
     return car;
   }
 
   public async findByLicensePlate(license_plate: string): Promise<Car> {
-    const car = await this.repository.findOne({ where: { license_plate } });
-
+    const car = await this.repository.findOne({ license_plate });
     return car;
   }
 
