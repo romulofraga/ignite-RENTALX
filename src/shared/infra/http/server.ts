@@ -1,17 +1,18 @@
 import "reflect-metadata";
 import "../../container";
+import "../../container/provider";
 
 import express, { Request, Response, NextFunction } from "express";
 import "express-async-errors";
 import swaggerUI from "swagger-ui-express";
 
-import createConection from "@shared/infra/typeorm";
+import createConnection from "@shared/infra/typeorm";
 
 import swaggerFile from "../../../swagger.json";
 import AppError from "../../errors/AppError";
 import routes from "./routes";
 
-createConection();
+createConnection();
 const app = express();
 
 app.use(express.json());

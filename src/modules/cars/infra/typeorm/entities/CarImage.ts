@@ -11,7 +11,7 @@ import { v4 } from "uuid";
 import Car from "./Car";
 
 @Entity("cars_image")
-export default class CarImage {
+export default class CarImageCarImage {
   @PrimaryColumn()
   id: string;
 

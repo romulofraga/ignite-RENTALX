@@ -4,6 +4,8 @@ import CarsRepository from "@modules/cars/infra/typeorm/repositories/CarReposito
 import CarsImageRepository from "@modules/cars/infra/typeorm/repositories/CarsImageRepository";
 import ICarsImagesRepository from "@modules/cars/repositories/ICarsImagesRepository";
 import ICarsRepository from "@modules/cars/repositories/ICarsRepository";
+import RentalsRepository from "@modules/rentals/infra/typeorm/repositories/RentalsRepository";
+import IRentalsRepository from "@modules/rentals/repositories/IRentalsRepository";
 
 import UsersRepository from "../../modules/accounts/infra/repositories/UsersRepository";
 import IUsersRepository from "../../modules/accounts/repositories/IUsersRepository";
@@ -32,4 +34,9 @@ container.registerSingleton<ICarsRepository>("CarsRepository", CarsRepository);
 container.registerSingleton<ICarsImagesRepository>(
   "CarImagesRepository",
   CarsImageRepository
+);
+
+container.registerSingleton<IRentalsRepository>(
+  "RentalsRepository",
+  RentalsRepository
 );
