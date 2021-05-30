@@ -6,6 +6,13 @@ import IRentalsRepository from "../IRentalsRepository";
 export default class RentalRepositoryInMemory implements IRentalsRepository {
   rentals: Rental[] = [];
 
+  public async findById(id: string): Promise<Rental> {
+    return this.rentals.find((rental) => id === rental.id);
+  }
+  public async findByUserId(user_id: string): Promise<Rental[]> {
+    return this.rentals.filter((rental) => user_id === rental.user_id);
+  }
+
   public async create({
     car_id,
     user_id,

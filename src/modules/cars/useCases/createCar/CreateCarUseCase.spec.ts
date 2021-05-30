@@ -26,7 +26,7 @@ describe("Create Car", () => {
     expect(car).toHaveProperty("id");
   });
 
-  it("should be able to create a car with disponibility", async () => {
+  it("should be able to create a car with availability", async () => {
     const car = await createCarUseCase.execute({
       name: "name car",
       description: "Description car",
@@ -51,8 +51,8 @@ describe("Create Car", () => {
       category_id: "category",
     });
 
-    expect(async () => {
-      await createCarUseCase.execute({
+    await expect(
+      createCarUseCase.execute({
         name: "name car",
         description: "Description car",
         daily_rate: 100,
@@ -60,7 +60,7 @@ describe("Create Car", () => {
         license_plate: "ABC-123",
         brand: "Brand",
         category_id: "category",
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      })
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

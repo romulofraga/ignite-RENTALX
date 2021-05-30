@@ -9,7 +9,6 @@ import {
 } from "typeorm";
 import { v4 } from "uuid";
 
-import User from "@modules/accounts/infra/typeorm/entities/User";
 import Car from "@modules/cars/infra/typeorm/entities/Car";
 
 @Entity("rentals")
@@ -17,23 +16,15 @@ export default class Rental {
   @PrimaryColumn()
   id: string;
 
-  @Column()
-  car_id: string;
-
   @ManyToOne(() => Car)
-  @JoinColumn({
-    name: "car_id",
-  })
+  @JoinColumn({ name: "car_id" })
   car: Car;
 
   @Column()
-  user_id: string;
+  car_id: string;
 
-  @ManyToOne(() => User)
-  @JoinColumn({
-    name: "user_id",
-  })
-  user: User;
+  @Column()
+  user_id: string;
 
   @Column()
   start_date: Date;

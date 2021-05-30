@@ -34,11 +34,11 @@ describe("Create Category", () => {
 
     await createCategoryUseCase.execute(category);
 
-    expect(async () => {
-      await createCategoryUseCase.execute({
+    await expect(
+      createCategoryUseCase.execute({
         name: "Category",
         description: "Description",
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      })
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

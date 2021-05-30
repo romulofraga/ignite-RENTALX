@@ -6,6 +6,15 @@ import ICarsRepository from "../ICarsRepository";
 export default class CarsRepositoryInMemory implements ICarsRepository {
   private cars: Car[] = [];
 
+  public async updateAvailable(
+    car_id: string,
+    available: boolean
+  ): Promise<void> {
+    const carIndex = this.cars.findIndex((car) => car.id === car_id);
+
+    this.cars[carIndex].available = available;
+  }
+
   public async create({
     name,
     description,
@@ -40,7 +49,7 @@ export default class CarsRepositoryInMemory implements ICarsRepository {
     return this.cars.find((car) => car.license_plate === license_plate);
   }
 
-  public async findAllAvaiable(
+  public async findAllAvailable(
     category_id?: string,
     brand?: string,
     name?: string

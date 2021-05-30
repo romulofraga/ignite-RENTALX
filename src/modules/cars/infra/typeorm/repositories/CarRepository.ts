@@ -49,12 +49,12 @@ export default class CarsRepository implements ICarsRepository {
     return car;
   }
 
-  public async findAllAvaiable(
+  public async findAllAvailable(
     category_id?: string,
     brand?: string,
     name?: string
   ): Promise<Car[]> {
-    const carsQuery = await this.repository
+    const carsQuery = this.repository
       .createQueryBuilder("cars")
       .where("available = :available", { available: true });
 
@@ -70,5 +70,18 @@ export default class CarsRepository implements ICarsRepository {
 
     const cars = await carsQuery.getMany();
     return cars;
+  }
+
+  public async updateAvailable(
+    car_id: string,
+    available: boolean
+  ): Promise<void> {
+    await this.repository
+      .createQueryBuilder()
+      .update()
+      .set({ available })
+      .where("id= :car_id")
+      .setParameters({ car_id })
+      .execute();
   }
 }

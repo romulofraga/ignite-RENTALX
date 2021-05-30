@@ -11,7 +11,7 @@ describe("List Cars", () => {
     listCarsUseCase = new ListAvailableCarsUseCase(carsRepository);
   });
 
-  it("shoud be able to list all avaiable cars", async () => {
+  it("should be able to list all available cars", async () => {
     const car1 = await carsRepository.create({
       name: "teste 2",
       description: "teste 2",
@@ -27,7 +27,7 @@ describe("List Cars", () => {
     expect(cars).toEqual([car1]);
   });
 
-  it("shoud be able to list all avaialble cars by name", async () => {
+  it("should be able to list all available cars by name", async () => {
     const car1 = await carsRepository.create({
       name: "teste 2",
       description: "teste 2",
