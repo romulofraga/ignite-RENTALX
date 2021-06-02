@@ -1,6 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
 
+import auth from "@config/auth";
+import UserTokensRepository from "@modules/accounts/infra/repositories/UserTokensRepository";
+
 import UsersRepository from "../../../../modules/accounts/infra/repositories/UsersRepository";
 import AppError from "../../../errors/AppError";
 
@@ -13,8 +16,9 @@ export default async function ensureAuthenticated(
   response: Response,
   next: NextFunction
 ): Promise<void> {
-  // Bearer Token -> headers
   const authHeader = request.headers.authorization;
+
+  const userTokensRepository = new UserTokensRepository();
 
   if (!authHeader) {
     throw new AppError("Token missing", 401);
@@ -24,18 +28,18 @@ export default async function ensureAuthenticated(
   try {
     const { sub: user_id } = verify(
       token,
-      "f2debdd1b79be0f7e4742eaa8d26cccf"
+      auth.secret_refresh_token
     ) as IPayload;
 
-    const usersRepository = new UsersRepository();
-
-    const user = await usersRepository.findById(user_id);
+    const user = await userTokensRepository.findByUserIdAndRefreshToken(
+      user_id,
+      token
+    );
 
     if (!user) {
       throw new AppError("User doesn't exists", 401);
     }
 
-    // fornece o id do usuário autenticado para as rotas que usam o middleware
     request.user = {
       id: user_id,
     };
