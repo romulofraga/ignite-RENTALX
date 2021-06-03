@@ -4,7 +4,6 @@ import { verify } from "jsonwebtoken";
 import auth from "@config/auth";
 import UserTokensRepository from "@modules/accounts/infra/repositories/UserTokensRepository";
 
-import UsersRepository from "../../../../modules/accounts/infra/repositories/UsersRepository";
 import AppError from "../../../errors/AppError";
 
 interface IPayload {
