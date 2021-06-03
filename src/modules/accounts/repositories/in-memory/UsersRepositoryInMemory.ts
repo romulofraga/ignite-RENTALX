@@ -2,7 +2,7 @@ import ICreateUserDTO from "../../dtos/ICreateUserDTO";
 import User from "../../infra/typeorm/entities/User";
 import IUsersRepository from "../IUsersRepository";
 
-export default class UsersRepository implements IUsersRepository {
+export default class UsersRepositoryInMemory implements IUsersRepository {
   users: User[] = [];
 
   public async findById(user_id: string): Promise<User> {

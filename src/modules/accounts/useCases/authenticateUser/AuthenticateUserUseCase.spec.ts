@@ -1,20 +1,29 @@
+import DayJsDateProvider from "@shared/container/provider/DateProvider/implementations/DayJsDateProvider";
+
 import AppError from "../../../../shared/errors/AppError";
 import ICreateUserDTO from "../../dtos/ICreateUserDTO";
 import UsersRepositoryInMemory from "../../repositories/in-memory/UsersRepositoryInMemory";
+import UserTokensTokensRepositoryInMemory from "../../repositories/in-memory/UserTokensRepositoryInMemory";
 import CreateUserUseCase from "../createUser/CreateUserUseCase";
 import AuthenticateUserUseCase from "./AuthenticateUserUseCase";
 
 let authenticateUserUseCase: AuthenticateUserUseCase;
 let usersRepositoryInMemory: UsersRepositoryInMemory;
-let createUserUsecase: CreateUserUseCase;
+let createUserUseCase: CreateUserUseCase;
+let userTokensRepository: UserTokensTokensRepositoryInMemory;
+let dateProvider: DayJsDateProvider;
 
 describe("Authenticate User", () => {
   beforeEach(() => {
     usersRepositoryInMemory = new UsersRepositoryInMemory();
+    userTokensRepository = new UserTokensTokensRepositoryInMemory();
+    dateProvider = new DayJsDateProvider();
     authenticateUserUseCase = new AuthenticateUserUseCase(
-      usersRepositoryInMemory
+      usersRepositoryInMemory,
+      userTokensRepository,
+      dateProvider
     );
-    createUserUsecase = new CreateUserUseCase(usersRepositoryInMemory);
+    createUserUseCase = new CreateUserUseCase(usersRepositoryInMemory);
   });
 
   it("should be able to create user token", async () => {
@@ -25,7 +34,7 @@ describe("Authenticate User", () => {
       password: "123123",
     };
 
-    await createUserUsecase.execute(user);
+    await createUserUseCase.execute(user);
     const result = await authenticateUserUseCase.execute({
       email: user.email,
       password: user.password,
@@ -51,7 +60,7 @@ describe("Authenticate User", () => {
       password: "123123",
     };
 
-    await createUserUsecase.execute(user);
+    await createUserUseCase.execute(user);
 
     await expect(
       authenticateUserUseCase.execute({
