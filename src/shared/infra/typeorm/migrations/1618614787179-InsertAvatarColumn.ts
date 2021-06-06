@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, TableColumn } from "typeorm";
 
-export class AlterUserAddAvatar1616202763103 implements MigrationInterface {
+export class AlterUserAddAvatar1617107755910 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.addColumn(
       "users",

@@ -5,7 +5,7 @@ import {
   TableForeignKey,
 } from "typeorm";
 
-export class CreateSpecificationsCars1616804636017
+export class CreateSpecificationsCars1617706279572
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
@@ -32,24 +32,24 @@ export class CreateSpecificationsCars1616804636017
     await queryRunner.createForeignKey(
       "specifications_cars",
       new TableForeignKey({
-        name: "FKSpecificationCar",
+        name: "FK_Specifications_Cars_Specification",
         referencedTableName: "specifications",
         referencedColumnNames: ["id"],
         columnNames: ["specification_id"],
         onDelete: "SET NULL",
-        onUpdate: "SET NULL",
+        onUpdate: "SET NUll",
       })
     );
 
     await queryRunner.createForeignKey(
       "specifications_cars",
       new TableForeignKey({
-        name: "FKCarSpecification",
+        name: "FK_Specifications_Cars_Car",
         referencedTableName: "cars",
         referencedColumnNames: ["id"],
         columnNames: ["car_id"],
         onDelete: "SET NULL",
-        onUpdate: "SET NULL",
+        onUpdate: "SET NUll",
       })
     );
   }
@@ -57,14 +57,12 @@ export class CreateSpecificationsCars1616804636017
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropForeignKey(
       "specifications_cars",
-      "FKCarSpecification"
+      "FK_Specifications_Cars_Car"
     );
-
     await queryRunner.dropForeignKey(
       "specifications_cars",
-      "FKSpecificationCar"
+      "FK_Specifications_Cars_Specification"
     );
-
     await queryRunner.dropTable("specifications_cars");
   }
 }
