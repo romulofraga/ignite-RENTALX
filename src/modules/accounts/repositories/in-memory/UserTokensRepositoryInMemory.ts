@@ -2,7 +2,8 @@ import ICreateUserTokensDTO from "@modules/accounts/dtos/ICreateUserTokensDTO";
 import UserTokens from "@modules/accounts/infra/typeorm/entities/UserTokens";
 import IUserTokensRepository from "@modules/accounts/repositories/IUserTokensRepository";
 
-export default class UserTokensRepository implements IUserTokensRepository {
+export default class UserTokensRepositoryInMemory
+  implements IUserTokensRepository {
   userTokens: UserTokens[] = [];
 
   public async findByRefreshToken(refresh_token: string): Promise<UserTokens> {
