@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateCars1617456911057 implements MigrationInterface {
+export class CreateCars1616767002011 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -53,7 +53,7 @@ export class CreateCars1617456911057 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: "FK_Cars_Category",
+            name: "FKCategoryCar",
             referencedTableName: "categories",
             referencedColumnNames: ["id"],
             columnNames: ["category_id"],

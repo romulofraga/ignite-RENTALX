@@ -1,16 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateRantals1622315217789 implements MigrationInterface {
+export class CreateRentals1616846425130 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: "rentals",
         columns: [
-          {
-            name: "id",
-            type: "uuid",
-            isPrimary: true,
-          },
+          { name: "id", type: "uuid", isPrimary: true },
           {
             name: "car_id",
             type: "uuid",
@@ -24,6 +20,7 @@ export class CreateRantals1622315217789 implements MigrationInterface {
             type: "timestamp",
             default: "now()",
           },
+
           {
             name: "end_date",
             type: "timestamp",
@@ -51,15 +48,15 @@ export class CreateRantals1622315217789 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: "FK_Car_Rental",
+            name: "FKCarRental",
             referencedTableName: "cars",
             referencedColumnNames: ["id"],
             columnNames: ["car_id"],
-            onUpdate: "SET NULL",
             onDelete: "SET NULL",
+            onUpdate: "SET NULL",
           },
           {
-            name: "FK_User_Rental",
+            name: "FKUserRental",
             referencedTableName: "users",
             referencedColumnNames: ["id"],
             columnNames: ["user_id"],

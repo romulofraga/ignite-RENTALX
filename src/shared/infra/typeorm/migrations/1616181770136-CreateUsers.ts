@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateUsersToken1622590475086 implements MigrationInterface {
+export class CreateUsers1616181770136 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "users_tokens",
+        name: "users",
         columns: [
           {
             name: "id",
@@ -12,16 +12,30 @@ export class CreateUsersToken1622590475086 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: "refresh_token",
+            name: "name",
             type: "varchar",
           },
           {
-            name: "user_id",
-            type: "uuid",
+            name: "username",
+            type: "varchar",
+            isUnique: true,
           },
           {
-            name: "expires_at",
-            type: "timestamp",
+            name: "password",
+            type: "varchar",
+          },
+          {
+            name: "email",
+            type: "varchar",
+          },
+          {
+            name: "driver_license",
+            type: "varchar",
+          },
+          {
+            name: "isAdmin",
+            type: "boolean",
+            default: false,
           },
           {
             name: "created_at",
@@ -29,21 +43,11 @@ export class CreateUsersToken1622590475086 implements MigrationInterface {
             default: "now()",
           },
         ],
-        foreignKeys: [
-          {
-            name: "FK_User_Token",
-            columnNames: ["user_id"],
-            referencedTableName: "users",
-            referencedColumnNames: ["id"],
-            onDelete: "CASCADE",
-            onUpdate: "CASCADE",
-          },
-        ],
       })
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("users_tokens");
+    await queryRunner.dropTable("users");
   }
 }
