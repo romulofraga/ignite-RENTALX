@@ -3,7 +3,7 @@
   "port": 5432,
   "host": "localhost",
   "username": "docker",
-  "password": "ignite",
+  "password": "docker",
   "database": "api_rentx",
   "migrations": [
     "./src/shared/infra/typeorm/migrations/*.ts"
