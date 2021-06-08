@@ -1,9 +1,8 @@
 import "reflect-metadata";
 import "dotenv/config";
-
 import "../../container";
 import "../../container/provider";
-
+import cors from "cors";
 import express, { Request, Response, NextFunction } from "express";
 import "express-async-errors";
 import swaggerUI from "swagger-ui-express";
@@ -25,6 +24,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerFile));
 app.use("/avatar", express.static(`${uploadConfig.dest}/avatar`));
 app.use("/cars", express.static(`${uploadConfig.dest}/cars`));
 
+app.use(cors());
 app.use(routes);
 
 app.use(

@@ -43,5 +43,15 @@ jobs:
           script: |
             cd ~/app/api-rentx
             yarn
-            yarn typeorm:prod migration:run
+
+      - name: Start app and database
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/app/api-rentx
+            node_modules/.bin/typeorm migration:run
             pm2 restart api-rentx
