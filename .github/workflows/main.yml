@@ -44,5 +44,5 @@ jobs:
             cd ~/app/api-rentx
             yarn
             docker-compose up -d
-            ./node_modules/.bin/typeorm migration:run
+            yarn typeorm:prod migration:run
             pm2 restart api-rentx
