@@ -43,6 +43,5 @@ jobs:
           script: |
             cd ~/app/api-rentx
             yarn
-            docker-compose up -d
             yarn typeorm:prod migration:run
             pm2 restart api-rentx
